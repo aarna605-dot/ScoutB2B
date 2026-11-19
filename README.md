@@ -1,4 +1,4 @@
-# 📦 ProcureSaathi (प्रोक्योर साथी)
+# 📦 ScoutB2B (स्काउट बी2बी)
 ### *Autonomous AI Procurement Copilot for Small Businesses & Cloud Kitchens*
 > **Powered by TinyFish Web Operating Platform for AI Agents** 🐟🤖
 
@@ -10,7 +10,7 @@
 
 ---
 
-## 🎯 1. What is ProcureSaathi?
+## 🎯 1. What is ScoutB2B?
 
 Small food businesses (cloud kitchens, independent cafes, quick-service restaurants, kirana stores) in India lose **15% to 30% of their operational budget** on procurement inefficiencies. 
 
@@ -20,7 +20,7 @@ When a restaurant owner needs **5,000 food packaging containers**:
 - They get blindsided by **12% to 18% GST**, interstate freight, and handling surcharges at checkout.
 - Delivery delays jeopardize kitchen operations and customer service.
 
-**ProcureSaathi** is an autonomous web-agent platform that executes end-to-end procurement research in seconds. It understands freeform requirements, deploys **TinyFish** to crawl live B2B supplier portals, normalizes hidden taxes & shipping fees into **Verified True Landed Costs**, and generates **1-click WhatsApp/Email RFQ drafts**.
+**ScoutB2B** is an autonomous web-agent platform that executes end-to-end procurement research in seconds. It understands freeform requirements, deploys **TinyFish** to crawl live B2B supplier portals, normalizes hidden taxes & shipping fees into **Verified True Landed Costs**, and generates **1-click WhatsApp/Email RFQ drafts**.
 
 ---
 
@@ -51,7 +51,7 @@ sequenceDiagram
 
 ---
 
-## 🐟 3. Why TinyFish is Central to ProcureSaathi
+## 🐟 3. Why TinyFish is Central to ScoutB2B
 
 Without TinyFish, procurement platforms rely on stale, manual databases that go out of date within weeks.
 With TinyFish, ProcureSaathi has a live web operating engine:
@@ -63,7 +63,7 @@ With TinyFish, ProcureSaathi has a live web operating engine:
    - Renders JavaScript-heavy single-page applications (SPAs) inside headless Chromium.
    - Strips cookie banners, headers, and ads to return structured content for LLM ingestion.
 3. **Resilient Hybrid Fallback**:
-   - Out of the box, if an API key is not yet configured or during offline hackathon presentations, ProcureSaathi seamlessly engages its curated B2B packaging repository so that demos never break.
+   - Out of the box, if an API key is not yet configured or during offline hackathon presentations, ScoutB2B seamlessly engages its curated B2B packaging repository so that demos never break.
 
 ---
 
@@ -84,7 +84,7 @@ With TinyFish, ProcureSaathi has a live web operating engine:
 ## 📁 5. Repository Structure
 
 ```
-ProcureSaathi/
+ScoutB2B/
 ├── PROGRESS.md                 # Granular milestone & progress tracker
 ├── PROJECT_CONTEXT.md          # Master context document for humans & LLMs
 ├── README.md                   # This overview & presentation guide
@@ -222,4 +222,4 @@ If you or another AI assistant want to expand this repository:
 ---
 
 ## 📄 License
-MIT License. Built for the Hackathon with 💚 by the ProcureSaathi Team.
+MIT License. Built for the Kritical Hacks Hackathon with 💚 by In it to Win it.
