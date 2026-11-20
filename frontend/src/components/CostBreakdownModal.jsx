@@ -129,18 +129,16 @@ export default function CostBreakdownModal({ offer, quantity, onClose, onOpenRFQ
 
         {/* Action Buttons */}
         <div style={{ display: 'flex', gap: '0.75rem' }}>
-          {source_url && (
-            <a
-              href={source_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-              style={{ flex: 1 }}
-            >
-              <ExternalLink size={15} />
-              <span>Source Catalog</span>
-            </a>
-          )}
+          <a
+            href={source_url && source_url !== '#' ? source_url : `https://dir.indiamart.com/search.mp?ss=${encodeURIComponent(product_title || supplier_name || 'supplies')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary"
+            style={{ flex: 1 }}
+          >
+            <ExternalLink size={15} />
+            <span>Source Catalog</span>
+          </a>
           <button
             type="button"
             className="btn-whatsapp"

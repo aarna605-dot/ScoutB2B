@@ -20,7 +20,8 @@ import {
   Printer,
   Calculator,
   HandCoins,
-  Compass
+  Compass,
+  ExternalLink
 } from 'lucide-react';
 
 const QUICK_VOLUMES = [1000, 2500, 5000, 10000, 20000];
@@ -49,6 +50,19 @@ const CATEGORY_FALLBACK_IMAGES = {
   ceramic: [
     "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
     "https://images.unsplash.com/photo-1577937927133-66ef06acdf18?w=600&auto=format&fit=crop&q=80"
+  ],
+  furniture: [
+    "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1580481077195-c3a82104536b?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&auto=format&fit=crop&q=80"
+  ],
+  steel: [
+    "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1535813547-99c456a41d4a?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80"
   ]
 };
 
@@ -57,6 +71,14 @@ function getProductFallbackImage(offer, idx) {
   const title = (offer?.product_title || "").toLowerCase();
   const cat = (offer?.category || "").toLowerCase();
 
+  if (title.includes("furniture") || title.includes("chair") || title.includes("desk") || title.includes("table") || cat.includes("furniture")) {
+    const list = CATEGORY_FALLBACK_IMAGES.furniture;
+    return list[idx % list.length];
+  }
+  if (title.includes("steel") || title.includes("metal") || title.includes("iron") || cat.includes("metal")) {
+    const list = CATEGORY_FALLBACK_IMAGES.steel;
+    return list[idx % list.length];
+  }
   if (title.includes("brass") || title.includes("hardware") || cat.includes("brass")) {
     const list = CATEGORY_FALLBACK_IMAGES.brass;
     return list[idx % list.length];
@@ -649,9 +671,18 @@ export default function ComparisonMatrix({
                   </div>
                 </div>
 
-                <div className="photo-domain-tag">
-                  {offer.source_domain}
-                </div>
+                <a
+                  href={offer.source_url || `https://dir.indiamart.com/search.mp?ss=${encodeURIComponent(offer.product_title || offer.supplier_name || 'supplies')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="photo-domain-tag"
+                  onClick={(e) => e.stopPropagation()}
+                  title={`Open live catalog on ${offer.source_domain || 'marketplace'}`}
+                  style={{ textDecoration: 'none', cursor: 'pointer' }}
+                >
+                  <ExternalLink size={10} style={{ display: 'inline', marginRight: '3px' }} />
+                  <span>{offer.source_domain}</span>
+                </a>
               </div>
 
               <div className="card-body-content">
@@ -858,6 +889,19 @@ export default function ComparisonMatrix({
                     <Printer size={13} />
                     <span>Dossier</span>
                   </button>
+
+                  <a
+                    href={offer.source_url || `https://dir.indiamart.com/search.mp?ss=${encodeURIComponent(offer.product_title || offer.supplier_name || 'supplies')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-print-dossier"
+                    style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '3px' }}
+                    title="Open live verified catalog on marketplace"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ExternalLink size={12} />
+                    <span>Catalog</span>
+                  </a>
                 </div>
               </div>
             </div>

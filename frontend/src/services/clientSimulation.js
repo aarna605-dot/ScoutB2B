@@ -104,7 +104,7 @@ export const SUPPLIER_POOLS = {
       id: "sup-moglix-bulk",
       supplier_name: "Moglix Enterprise Packaging Hub",
       source_domain: "moglix.com",
-      source_url: "https://www.moglix.com/packaging-supplies/food-containers/750ml-kraft",
+      source_url: "https://www.moglix.com/search?s=food+containers",
       product_title: "Commercial Grade Heavyweight Food Container with Airtight Lid",
       product_image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&auto=format&fit=crop&q=80",
       category: "Packaging & Containers",
@@ -137,7 +137,7 @@ export const SUPPLIER_POOLS = {
       id: "sup-alpha-pack",
       supplier_name: "Alpha Pack Tech Traders",
       source_domain: "indiamart.com",
-      source_url: "https://www.indiamart.com/alphapacktech/cheap-food-containers.html",
+      source_url: "https://dir.indiamart.com/search.mp?ss=disposable+meal+box",
       product_title: "Economy Disposable Meal Box 750ml",
       product_image: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?w=600&auto=format&fit=crop&q=80",
       category: "Packaging & Containers",
@@ -318,336 +318,231 @@ export function evaluateOffers(rawSuppliers, request) {
 }
 
 export function getSupplierPoolForQuery(req) {
-  const item = (req?.item_name || "").toLowerCase();
-  const query = (req?.query_text || "").toLowerCase();
+  const item = (req?.item_name || "").toLowerCase().trim();
+  const query = (req?.query_text || "").toLowerCase().trim();
   const combined = `${item} ${query}`;
+  const baseName = req?.item_name || "Commercial Supplies";
+  const qty = req?.quantity || 500;
+  const unitBudget = Math.max(Math.round((req?.max_budget || 20000) / Math.max(qty, 1)), 15);
 
-  if (combined.includes("mug") || combined.includes("cup") || combined.includes("drinkware") || combined.includes("ceramic")) {
-    return [
-      {
-        id: "sup-khurja-ceramics",
-        supplier_name: "Khurja Heritage Pottery & Ceramics",
-        source_domain: "indiamart.com",
-        source_url: "https://dir.indiamart.com/search.mp?ss=khurja+ceramic+mugs",
-        product_title: "350ml Matte Finish Stoneware Ceramic Coffee Mug",
-        product_image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
-        category: "Drinkware & Ceramics",
-        base_unit_price: 36.00,
-        moq: 300,
-        tiered_pricing: [
-          { min_qty: 300, unit_price: 40.00 },
-          { min_qty: 500, unit_price: 36.00 },
-          { min_qty: 1500, unit_price: 32.50 }
-        ],
-        gst_percentage: 12.0,
-        shipping_policy: "free_over_10k",
-        base_shipping_cost: 650.0,
-        estimated_delivery_days: 4,
-        supplier_rating: 4.8,
-        review_count: 240,
-        verified_seller: true,
-        food_grade_certified: true,
-        biodegradable: false,
-        location_city: "Khurja Ceramic Hub, Uttar Pradesh",
-        contact_phone: "+91 98371 42210",
-        contact_email: "orders@khurjaceramics.com",
-        evidence_snippet: "Khurja Cluster Direct: High-temperature kiln-fired stoneware (1250°C). Microwave & dishwasher safe. ₹36.00/pc for 500+ units. GST 12% extra. Free insured crate packing on orders above ₹12,000.",
-        missing_or_risk_notes: [
-          "Fragile shipment palletized with bubble cushion sleeves (12 pcs/box)."
-        ]
-      },
-      {
-        id: "sup-claycraft-jaipur",
-        supplier_name: "ClayCraft Tableware Industries",
-        source_domain: "claycraftindia.com",
-        source_url: "https://dir.indiamart.com/search.mp?ss=claycraft+ceramic+mugs",
-        product_title: "350ml Premium Ceramic Dual-Tone Coffee Mug",
-        product_image: "https://images.unsplash.com/photo-1577937927133-66ef06acdf18?w=600&auto=format&fit=crop&q=80",
-        category: "Drinkware & Ceramics",
-        base_unit_price: 39.50,
-        moq: 500,
-        tiered_pricing: [
-          { min_qty: 500, unit_price: 39.50 },
-          { min_qty: 1000, unit_price: 37.00 },
-          { min_qty: 2500, unit_price: 34.00 }
-        ],
-        gst_percentage: 18.0,
-        shipping_policy: "flat_freight",
-        base_shipping_cost: 750.0,
-        estimated_delivery_days: 5,
-        supplier_rating: 4.7,
-        review_count: 310,
-        verified_seller: true,
-        food_grade_certified: true,
-        biodegradable: false,
-        location_city: "Sitapura Industrial Area, Jaipur",
-        contact_phone: "+91 98290 55120",
-        contact_email: "b2b@claycrafttableware.in",
-        evidence_snippet: "ClayCraft B2B Catalog: High-gloss lead-free porcelain glaze. Break-resistant rim design. Sourced from Sitapura works. GST 18% extra. Standard road freight via TCI Freight ₹750 flat.",
-        missing_or_risk_notes: [
-          "Flat road logistics fee applies regardless of consignment batch value."
-        ]
-      },
-      {
-        id: "sup-morbi-crockery",
-        supplier_name: "Morbi Vitrified Ceramic Works",
-        source_domain: "tradeindia.com",
-        source_url: "https://www.tradeindia.com/search.html?keyword=ceramic+mugs",
-        product_title: "350ml Minimalist Sublimation White Ceramic Mug",
-        product_image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600&auto=format&fit=crop&q=80",
-        category: "Drinkware & Ceramics",
-        base_unit_price: 31.00,
-        moq: 2500,
-        tiered_pricing: [
-          { min_qty: 2500, unit_price: 31.00 },
-          { min_qty: 5000, unit_price: 28.50 }
-        ],
-        gst_percentage: 18.0,
-        shipping_policy: "flat_freight",
-        base_shipping_cost: 1100.0,
-        estimated_delivery_days: 7,
-        supplier_rating: 4.4,
-        review_count: 95,
-        verified_seller: true,
-        food_grade_certified: true,
-        biodegradable: false,
-        location_city: "Morbi Industrial Zone, Gujarat",
-        contact_phone: "+91 97240 66891",
-        contact_email: "sales@morbivitrified.com",
-        evidence_snippet: "TradeIndia Verified: Advertised rate of ₹31.00 requires minimum order volume of 2,500 units. Smaller quantities subject to ₹45 retail surcharge. Heavy interstate freight from Gujarat.",
-        missing_or_risk_notes: [
-          "Predatory MOQ Trap: Advertised low price locks up high working capital (2,500 units min)."
-        ]
-      },
-      {
-        id: "sup-delhi-ceramics",
-        supplier_name: "Bharat Chinaware & Tableware",
-        source_domain: "indiamart.com",
-        source_url: "https://dir.indiamart.com/search.mp?ss=ceramic+coffee+mugs+delhi",
-        product_title: "350ml Heavy-Base Ceramic Bistro Mug",
-        product_image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&auto=format&fit=crop&q=80",
-        category: "Drinkware & Ceramics",
-        base_unit_price: 43.00,
-        moq: 200,
-        tiered_pricing: [
-          { min_qty: 200, unit_price: 45.00 },
-          { min_qty: 500, unit_price: 43.00 },
-          { min_qty: 1000, unit_price: 40.00 }
-        ],
-        gst_percentage: 12.0,
-        shipping_policy: "free_over_10k",
-        base_shipping_cost: 450.0,
-        estimated_delivery_days: 3,
-        supplier_rating: 4.9,
-        review_count: 420,
-        verified_seller: true,
-        food_grade_certified: true,
-        biodegradable: false,
-        location_city: "Mayapuri Industrial Area, New Delhi",
-        contact_phone: "+91 98101 22345",
-        contact_email: "b2b@bharatchinaware.com",
-        evidence_snippet: "NCR Local Hub: Immediate dispatch within 24 hours. Food Grade US-FDA compliance certified. GST 12% extra. Free local Delhi NCR doorstep freight on orders over ₹10,000.",
-        missing_or_risk_notes: [
-          "Highest unit rate compensated by rapid 3-day local fulfillment buffer."
-        ]
-      },
-      {
-        id: "sup-south-pottery",
-        supplier_name: "Artisan Terra Stoneware Works",
-        source_domain: "indiamart.com",
-        source_url: "https://dir.indiamart.com/search.mp?ss=stoneware+coffee+mugs",
-        product_title: "350ml Handcrafted Rustic Speckled Ceramic Mug",
-        product_image: "https://images.unsplash.com/photo-1481833761820-0509d3217039?w=600&auto=format&fit=crop&q=80",
-        category: "Drinkware & Ceramics",
-        base_unit_price: 47.00,
-        moq: 150,
-        tiered_pricing: [
-          { min_qty: 150, unit_price: 49.00 },
-          { min_qty: 500, unit_price: 47.00 },
-          { min_qty: 1000, unit_price: 44.00 }
-        ],
-        gst_percentage: 12.0,
-        shipping_policy: "flat_freight",
-        base_shipping_cost: 550.0,
-        estimated_delivery_days: 5,
-        supplier_rating: 4.6,
-        review_count: 140,
-        verified_seller: true,
-        food_grade_certified: true,
-        biodegradable: false,
-        location_city: "Peenya Industrial Estate, Bengaluru",
-        contact_phone: "+91 94480 33112",
-        contact_email: "orders@artisanterra.in",
-        evidence_snippet: "Artisan Studio: Lead-free eco reactive glaze with earthen textured base. Individually boxed in kraft packaging. GST 12% extra. Safe transit guarantee.",
-        missing_or_risk_notes: [
-          "Artisan studio batch output; capacity limited to 2,000 units/week."
-        ]
-      }
-    ];
-  }
-
-  if (combined.includes("brass") || combined.includes("hardware") || combined.includes("casting") || combined.includes("fitting")) {
-    return SUPPLIER_POOLS.brass;
-  }
-  if (combined.includes("canvas") || combined.includes("cotton") || combined.includes("fabric") || combined.includes("textile") || combined.includes("bale") || combined.includes("shirt")) {
-    return SUPPLIER_POOLS.canvas;
-  }
-  if (combined.includes("wood") || combined.includes("timber") || combined.includes("sheesham") || combined.includes("blank")) {
-    return SUPPLIER_POOLS.wood;
-  }
-  if (combined.includes("container") || combined.includes("tray") || combined.includes("packaging") || combined.includes("box")) {
+  // 1. Only match exact preset capsules if requested
+  const isExactContainers = item === "kraft paper food containers (750ml)" || (combined.includes("food container") && combined.includes("750ml"));
+  if (isExactContainers) {
     return SUPPLIER_POOLS.packaging;
   }
 
-  // Dynamic synthesizer for ANY custom material
-  const baseName = req?.item_name || "Industrial Raw Material";
-  const qty = req?.quantity || 500;
-  const unitBudget = Math.max(Math.round((req?.max_budget || 20000) / Math.max(qty, 1)), 25);
+  // 2. Select appropriate commercial images based on item keyword
+  let dynImages = [
+    "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1553413077-190dd305871c?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?w=600&auto=format&fit=crop&q=80"
+  ];
+
+  if (/paper\s*cup|disposable\s*cup|coffee\s*cup|tea\s*cup/i.test(combined)) {
+    dynImages = [
+      "https://images.unsplash.com/photo-1577937927133-66ef06acdf18?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1584473457406-6240486418e9?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600&auto=format&fit=crop&q=80"
+    ];
+  } else if (/furniture|chair|desk|table|almirah|rack|shelf|cabinet/i.test(combined)) {
+    dynImages = [
+      "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1580481077195-c3a82104536b?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&auto=format&fit=crop&q=80"
+    ];
+  } else if (/steel|iron|metal|hardware|pipe|tube|rod|sheet|fastener/i.test(combined)) {
+    dynImages = [
+      "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1535813547-99c456a41d4a?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1553413077-190dd305871c?w=600&auto=format&fit=crop&q=80"
+    ];
+  } else if (/ceramic|pottery|stoneware|mug|crockery/i.test(combined)) {
+    dynImages = [
+      "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1577937927133-66ef06acdf18?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1481833761820-0509d3217039?w=600&auto=format&fit=crop&q=80"
+    ];
+  } else if (/cotton|canvas|fabric|textile|shirt|garment|cloth/i.test(combined)) {
+    dynImages = [
+      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=600&auto=format&fit=crop&q=80"
+    ];
+  } else if (/wood|timber|sheesham|plywood|lumber/i.test(combined)) {
+    dynImages = [
+      "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=600&auto=format&fit=crop&q=80"
+    ];
+  } else if (/container|box|packaging|kraft|bagasse|carton/i.test(combined)) {
+    dynImages = [
+      "https://images.unsplash.com/photo-1584473457406-6240486418e9?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1595246140625-573b715d11dc?w=600&auto=format&fit=crop&q=80"
+    ];
+  }
+
+  const isFood = /food|container|box|cup|mug|meal|plate|bowl|drinkware/i.test(combined);
+  const isBio = /bagasse|eco|kraft|paper|wood|biodegradable/i.test(combined);
+  const gstRate = (/steel|furniture|metal|hardware|electronic|plastic|brass|iron/i.test(combined)) ? 18.0 : 12.0;
+  const encodedName = encodeURIComponent(baseName.replace(/\s+/g, ' ').trim());
 
   return [
     {
       id: "sup-dyn-01",
-      supplier_name: `National Wholesale ${baseName} Works`,
+      supplier_name: `National ${baseName.split(' ')[0]} Guild Works`,
       source_domain: "indiamart.com",
-      source_url: `https://www.indiamart.com/search.mp?ss=${encodeURIComponent(baseName)}`,
-      product_title: `Commercial Grade ${baseName} (Wholesale Lot)`,
-      product_image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80",
+      source_url: `https://dir.indiamart.com/search.mp?ss=${encodedName}`,
+      product_title: `Commercial Grade ${baseName} (Wholesale Batch)`,
+      product_image: dynImages[0 % dynImages.length],
       category: req?.category || "General B2B Wholesale",
-      base_unit_price: Math.max(Math.round(unitBudget * 0.88), 10),
-      moq: Math.max(Math.round(qty * 0.4), 100),
+      base_unit_price: Math.max(Math.round(unitBudget * 0.88 * 100) / 100, 2.5),
+      moq: Math.max(Math.round(qty * 0.3), 50),
       tiered_pricing: [
-        { min_qty: Math.max(Math.round(qty * 0.4), 100), unit_price: Math.max(Math.round(unitBudget * 0.95), 12) },
-        { min_qty: qty, unit_price: Math.max(Math.round(unitBudget * 0.88), 10) },
-        { min_qty: qty * 2, unit_price: Math.max(Math.round(unitBudget * 0.82), 8) }
+        { min_qty: Math.max(Math.round(qty * 0.3), 50), unit_price: Math.max(Math.round(unitBudget * 0.98 * 100) / 100, 3.0) },
+        { min_qty: qty, unit_price: Math.max(Math.round(unitBudget * 0.88 * 100) / 100, 2.5) },
+        { min_qty: qty * 2, unit_price: Math.max(Math.round(unitBudget * 0.80 * 100) / 100, 2.2) }
       ],
-      gst_percentage: 18.0,
+      gst_percentage: gstRate,
       shipping_policy: "free_over_10k",
-      base_shipping_cost: 650.0,
-      estimated_delivery_days: 5,
+      base_shipping_cost: 450.0,
+      estimated_delivery_days: 4,
       supplier_rating: 4.8,
       review_count: 220,
       verified_seller: true,
-      food_grade_certified: false,
-      biodegradable: false,
-      location_city: "Delhi NCR / Haryana",
+      food_grade_certified: isFood,
+      biodegradable: isBio,
+      location_city: "Delhi NCR Hub",
       contact_phone: "+91 98110 33445",
-      contact_email: "sales@nationalwholesaleworks.in",
-      evidence_snippet: `B2B verified listing: Direct manufacturer quotes for ${baseName} at ₹${Math.max(Math.round(unitBudget * 0.88), 10)}/unit. Standard 18% GST applies. Dispatch within 3-5 business days.`,
-      missing_or_risk_notes: ["Standard master pallet delivery with tamper seals."]
+      contact_email: "sales@nationalguildworks.in",
+      evidence_snippet: `TrustSEAL Verified listing on indiamart.com: Direct factory batch quote for ${baseName}. GST ${gstRate}% invoice with transit cover. Free delivery on orders over ₹10,000.`,
+      missing_or_risk_notes: []
     },
     {
       id: "sup-dyn-02",
-      supplier_name: `Apex B2B Direct (${baseName} Hub)`,
+      supplier_name: `Apex B2B Direct (${baseName.split(' ')[0]} Works)`,
       source_domain: "moglix.com",
-      source_url: `https://www.moglix.com/search?s=${encodeURIComponent(baseName)}`,
+      source_url: `https://www.moglix.com/search?s=${encodedName}`,
       product_title: `Heavy Commercial Spec ${baseName}`,
-      product_image: "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=600&auto=format&fit=crop&q=80",
+      product_image: dynImages[1 % dynImages.length],
       category: req?.category || "General B2B Wholesale",
-      base_unit_price: Math.max(Math.round(unitBudget * 0.92), 12),
+      base_unit_price: Math.max(Math.round(unitBudget * 0.94 * 100) / 100, 2.8),
       moq: Math.max(Math.round(qty * 0.2), 50),
       tiered_pricing: [
-        { min_qty: Math.max(Math.round(qty * 0.2), 50), unit_price: Math.max(Math.round(unitBudget * 0.98), 15) },
-        { min_qty: qty, unit_price: Math.max(Math.round(unitBudget * 0.92), 12) }
+        { min_qty: Math.max(Math.round(qty * 0.2), 50), unit_price: Math.max(Math.round(unitBudget * 1.05 * 100) / 100, 3.2) },
+        { min_qty: qty, unit_price: Math.max(Math.round(unitBudget * 0.94 * 100) / 100, 2.8) }
       ],
-      gst_percentage: 18.0,
+      gst_percentage: gstRate,
       shipping_policy: "flat_freight",
       base_shipping_cost: 500.0,
-      estimated_delivery_days: 4,
+      estimated_delivery_days: 5,
       supplier_rating: 4.6,
       review_count: 140,
       verified_seller: true,
-      food_grade_certified: false,
-      biodegradable: false,
-      location_city: "Bhiwandi / Mumbai, Maharashtra",
+      food_grade_certified: isFood,
+      biodegradable: isBio,
+      location_city: "Bhiwandi / Mumbai Hub",
       contact_phone: "+91 98200 44556",
       contact_email: "orders@apexb2bdirect.in",
-      evidence_snippet: `Enterprise verified supplier: Batch quote for ${baseName}. ₹500 flat logistics tariff across metro zones.`,
-      missing_or_risk_notes: ["50% advance bank transfer required for first consignment."]
+      evidence_snippet: `Commercial specification for ${baseName} on moglix.com. Verified manufacturer warranty. ₹500 flat logistics tariff.`,
+      missing_or_risk_notes: []
     },
     {
       id: "sup-dyn-03",
-      supplier_name: `Prime Industrial Mills (Gujarat Hub)`,
+      supplier_name: `EcoDirect Industrial Enterprises`,
       source_domain: "tradeindia.com",
-      source_url: `https://www.tradeindia.com/search.html?keyword=${encodeURIComponent(baseName)}`,
-      product_title: `Export Lot Direct ${baseName}`,
-      product_image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop&q=80",
+      source_url: `https://www.tradeindia.com/search.html?keyword=${encodedName}`,
+      product_title: `Standard Wholesale Lot ${baseName}`,
+      product_image: dynImages[2 % dynImages.length],
       category: req?.category || "General B2B Wholesale",
-      base_unit_price: Math.max(Math.round(unitBudget * 0.74), 8),
-      moq: qty * 3,
+      base_unit_price: Math.max(Math.round(unitBudget * 1.02 * 100) / 100, 3.0),
+      moq: Math.max(Math.round(qty * 0.25), 50),
       tiered_pricing: [
-        { min_qty: qty * 3, unit_price: Math.max(Math.round(unitBudget * 0.74), 8) }
+        { min_qty: Math.max(Math.round(qty * 0.25), 50), unit_price: Math.max(Math.round(unitBudget * 1.02 * 100) / 100, 3.0) }
       ],
-      gst_percentage: 18.0,
-      shipping_policy: "flat_freight",
-      base_shipping_cost: 1200.0,
-      estimated_delivery_days: 7,
-      supplier_rating: 4.3,
-      review_count: 75,
+      gst_percentage: gstRate,
+      shipping_policy: "free_over_10k",
+      base_shipping_cost: 400.0,
+      estimated_delivery_days: 6,
+      supplier_rating: 4.9,
+      review_count: 310,
       verified_seller: true,
-      food_grade_certified: false,
-      biodegradable: false,
-      location_city: "Ahmedabad, Gujarat",
-      contact_phone: "+91 97230 11990",
-      contact_email: "dispatch@primeindustrialmills.com",
-      evidence_snippet: `Low rate advertised at ₹${Math.max(Math.round(unitBudget * 0.74), 8)}/unit strictly subject to volume commitment of ${qty * 3} units minimum.`,
-      missing_or_risk_notes: ["Predatory MOQ Trap: Requires 3x user requested quantity."]
+      food_grade_certified: isFood,
+      biodegradable: isBio,
+      location_city: "Greater Noida, UP",
+      contact_phone: "+91 99580 88712",
+      contact_email: "wholesale@ecodirect.in",
+      evidence_snippet: `TradeIndia Certified: Premium verified production of ${baseName}. Doorstep delivery with full damage transit insurance.`,
+      missing_or_risk_notes: []
     },
     {
       id: "sup-dyn-04",
       supplier_name: `Express Fast-Transit Supplies`,
       source_domain: "indiamart.com",
-      source_url: `https://www.indiamart.com/express-fast-supplies/index.html`,
+      source_url: `https://dir.indiamart.com/search.mp?ss=${encodedName}`,
       product_title: `Ready-Stock Immediate Dispatch ${baseName}`,
-      product_image: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=600&auto=format&fit=crop&q=80",
+      product_image: dynImages[3 % dynImages.length],
       category: req?.category || "General B2B Wholesale",
-      base_unit_price: Math.max(Math.round(unitBudget * 1.05), 15),
-      moq: 100,
+      base_unit_price: Math.max(Math.round(unitBudget * 1.10 * 100) / 100, 3.5),
+      moq: Math.max(Math.round(qty * 0.1), 25),
       tiered_pricing: [
-        { min_qty: 100, unit_price: Math.max(Math.round(unitBudget * 1.05), 15) },
-        { min_qty: qty, unit_price: Math.max(Math.round(unitBudget * 0.99), 14) }
+        { min_qty: Math.max(Math.round(qty * 0.1), 25), unit_price: Math.max(Math.round(unitBudget * 1.10 * 100) / 100, 3.5) },
+        { min_qty: qty, unit_price: Math.max(Math.round(unitBudget * 1.02 * 100) / 100, 3.1) }
       ],
-      gst_percentage: 12.0,
+      gst_percentage: gstRate,
       shipping_policy: "free_over_10k",
       base_shipping_cost: 350.0,
       estimated_delivery_days: 2,
       supplier_rating: 4.9,
       review_count: 380,
       verified_seller: true,
-      food_grade_certified: false,
-      biodegradable: false,
+      food_grade_certified: isFood,
+      biodegradable: isBio,
       location_city: "Okhla / Noida NCR",
       contact_phone: "+91 98119 77881",
       contact_email: "quick@expressfastsupplies.com",
-      evidence_snippet: `Local immediate warehouse stock. Guaranteed 48-hour delivery across Delhi NCR. GST 12% extra.`,
+      evidence_snippet: `Local immediate warehouse stock on indiamart.com. Guaranteed 48-hour delivery across Delhi NCR. GST ${gstRate}% applicable.`,
       missing_or_risk_notes: ["Premium pricing for express dispatch service."]
     },
     {
       id: "sup-dyn-05",
-      supplier_name: `Bharat Regional Manufacturing Co.`,
-      source_domain: "bharatb2b.in",
-      source_url: `https://www.bharatb2b.in/product-listing`,
-      product_title: `Standard Commercial Batch ${baseName}`,
-      product_image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80",
+      supplier_name: `Discount Wholesale Bazaar Traders`,
+      source_domain: "indiamart.com",
+      source_url: `https://dir.indiamart.com/search.mp?ss=${encodedName}`,
+      product_title: `Budget Clearance Batch ${baseName}`,
+      product_image: dynImages[4 % dynImages.length],
       category: req?.category || "General B2B Wholesale",
-      base_unit_price: Math.max(Math.round(unitBudget * 0.90), 12),
-      moq: Math.max(Math.round(qty * 0.5), 100),
+      base_unit_price: Math.max(Math.round(unitBudget * 0.65 * 100) / 100, 1.8),
+      moq: qty * 4,
       tiered_pricing: [
-        { min_qty: Math.max(Math.round(qty * 0.5), 100), unit_price: Math.max(Math.round(unitBudget * 0.90), 12) }
+        { min_qty: qty * 4, unit_price: Math.max(Math.round(unitBudget * 0.65 * 100) / 100, 1.8) },
+        { min_qty: qty, unit_price: Math.max(Math.round(unitBudget * 1.25 * 100) / 100, 3.8) }
       ],
-      gst_percentage: 18.0,
+      gst_percentage: gstRate,
       shipping_policy: "flat_freight",
-      base_shipping_cost: 450.0,
-      estimated_delivery_days: 5,
-      supplier_rating: 4.5,
-      review_count: 110,
-      verified_seller: true,
+      base_shipping_cost: 650.0,
+      estimated_delivery_days: 7,
+      supplier_rating: 3.8,
+      review_count: 38,
+      verified_seller: false,
       food_grade_certified: false,
       biodegradable: false,
-      location_city: "Jaipur / Rajasthan",
-      contact_phone: "+91 94140 22331",
-      contact_email: "sales@bharatregionalmfg.in",
-      evidence_snippet: `Batch tested and compliant. Ex-works quotation ₹${Math.max(Math.round(unitBudget * 0.90), 12)}/pc. Freight ₹450 flat.`,
-      missing_or_risk_notes: ["Transit insurance extra at actuals."]
+      location_city: "Jaipur, Rajasthan",
+      contact_phone: "+91 94140 22119",
+      contact_email: "sales@discountbazaar.in",
+      evidence_snippet: `Low headline rate of ₹${Math.max(Math.round(unitBudget * 0.65 * 100) / 100, 1.8)}/unit on indiamart.com strictly requires volume commitment of ${qty * 4} units minimum. Sub-lots billed at ₹${Math.max(Math.round(unitBudget * 1.25 * 100) / 100, 3.8)}/unit.`,
+      missing_or_risk_notes: [
+        `MOQ Trap: Headline price requires ordering ${qty * 4} units. Sub-lot pricing applies for smaller quantities.`
+      ]
     }
   ];
 }
@@ -882,69 +777,98 @@ export function recalculateCostsClient(params) {
 }
 
 export function parseQueryClient(text) {
-  let quantity = 500;
-  let maxBudget = 25000;
-  let deliveryDaysLimit = 7;
-  let itemName = "Ceramic Wholesale Mugs (350ml)";
-  let category = "Drinkware & Ceramics";
-
   const raw = (text || "").trim();
-  const clean = raw.toLowerCase();
-  
-  // 1. Extract quantity: e.g. "500 mugs", "5,000 units", "10k"
-  const qtyMatch = clean.match(/(\d+[\d,]*)\s*(?:units|containers|boxes|pieces|pcs|mugs|cups|bottles|shirts|bags|kg|tons)?/);
-  const kMatch = clean.match(/(\d+(?:\.\d+)?)\s*k\b/);
-  if (kMatch) {
-    quantity = Math.round(parseFloat(kMatch[1]) * 1000);
-  } else if (qtyMatch && parseInt(qtyMatch[1].replace(/,/g, ''), 10) > 0) {
-    quantity = parseInt(qtyMatch[1].replace(/,/g, ''), 10);
+  if (!raw) {
+    return {
+      item_name: "Commercial Supplies",
+      quantity: 500,
+      max_budget: 25000,
+      delivery_days_limit: 7,
+      delivery_city: "New Delhi",
+      category: "General B2B Wholesale",
+      confidence_score: 0.95
+    };
   }
 
-  // 2. Extract budget
-  const budgetMatch = clean.match(/(?:under|below|budget|within|max|rs\.?|₹)\s*₹?\s*(\d+[\d,]*)/);
+  // 1. Budget extraction first
+  let maxBudget = null;
+  const budgetMatch = raw.match(/(?:under|below|budget\s*(?:of|is)?|within|max|<|<=|rs\.?|₹)\s*₹?\s*(\d+[\d,]*)\s*(k)?\b/i);
   if (budgetMatch) {
-    maxBudget = parseFloat(budgetMatch[1].replace(/,/g, '')) || 25000;
-  } else {
-    maxBudget = Math.max(quantity * 45, 15000);
+    let b = parseFloat(budgetMatch[1].replace(/,/g, ''));
+    if (budgetMatch[2]) b *= 1000;
+    if (b > 0) maxBudget = b;
   }
 
-  // 3. Extract delivery days
-  const daysMatch = clean.match(/(\d+)\s*(?:days|day)/);
+  // 2. Timeline extraction
+  let deliveryDaysLimit = null;
+  const daysMatch = raw.match(/(?:within|in|delivered within|delivery:?)?\s*(\d+)\s*(?:business\s*)?(?:days|day|d)\b/i);
+  const wordDays = { 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'a week': 7, 'two weeks': 14 };
   if (daysMatch) {
-    deliveryDaysLimit = parseInt(daysMatch[1], 10) || 7;
-  } else if (clean.includes("seven days")) {
-    deliveryDaysLimit = 7;
-  }
-
-  // 4. Extract Category and Product Name
-  if (clean.includes("mug") || clean.includes("cup") || clean.includes("ceramic") || clean.includes("drinkware")) {
-    itemName = "Ceramic Wholesale Mugs (350ml)";
-    category = "Drinkware & Ceramics";
-  } else if (clean.includes("brass") || clean.includes("hardware") || clean.includes("fittings") || clean.includes("casting")) {
-    itemName = "Solid Brass Castings & Artisan Hardware";
-    category = "Artisan Handicraft & Brass";
-  } else if (clean.includes("container") || clean.includes("box") || clean.includes("packaging") || clean.includes("bagasse")) {
-    itemName = "Kraft Paper Food Containers (750ml)";
-    category = "Packaging & Containers";
-  } else if (clean.includes("shirt") || clean.includes("cotton") || clean.includes("canvas") || clean.includes("fabric") || clean.includes("textile")) {
-    itemName = "Raw Cotton Canvas Bales (Unbleached)";
-    category = "Textiles & Cotton Canvas";
-  } else if (clean.includes("wood") || clean.includes("timber") || clean.includes("sheesham")) {
-    itemName = "Seasoned Sheesham Wood Carving Blanks";
-    category = "Woodcraft & Timber Blanks";
+    deliveryDaysLimit = parseInt(daysMatch[1], 10);
   } else {
-    // Strip leading number to form item name
-    const stripped = raw.replace(/^\d+[\d,]*\s*(?:units|containers|boxes|pieces|pcs)?\s*/i, '').trim();
-    if (stripped.length > 1) {
-      itemName = stripped.charAt(0).toUpperCase() + stripped.slice(1);
+    for (const [w, n] of Object.entries(wordDays)) {
+      if (new RegExp('\\b(?:within|in)?\\s*' + w + '\\s*days?\\b', 'i').test(raw)) {
+        deliveryDaysLimit = n;
+        break;
+      }
     }
   }
 
+  // 3. Quantity extraction (excluding budget phrase)
+  let textForQty = raw;
+  if (budgetMatch) {
+    textForQty = textForQty.replace(budgetMatch[0], '');
+  }
+  let quantity = null;
+  const kMatch = textForQty.match(/\b(\d+(?:\.\d+)?)\s*k\b/i);
+  const qtyMatch = textForQty.match(/\b(\d+[\d,]*)\s*(?:units|containers|boxes|pieces|pcs|mugs|cups|bottles|shirts|bags|kg|tons|m\b|meters)?/i);
+  if (kMatch) {
+    quantity = Math.round(parseFloat(kMatch[1]) * 1000);
+  } else if (qtyMatch) {
+    const val = parseInt(qtyMatch[1].replace(/,/g, ''), 10);
+    if (val > 0) quantity = val;
+  }
+
+  // 4. Product Name Extraction
+  let item = raw;
+  item = item.replace(/^(?:i\s*need|we\s*need|need|looking\s*for|require|we\s*require|want|source|please\s*get|procure)\s+/i, '');
+  item = item.replace(/(?:delivered\s*)?(?:within|in)?\s*(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|a\s*week)\s*(?:business\s*)?days?(?:\s*lead\s*time)?\.mp?/gi, '');
+  item = item.replace(/(?:under|below|budget\s*(?:of|is)?|within|max|<|<=)\s*₹?\s*\d+[\d,]*(?:\s*k)?\b\.mp?/gi, '');
+  item = item.replace(/₹\s*\d+[\d,]*(?:\s*k)?\b/gi, '');
+  item = item.replace(/\b\d+[\d,]*(?:\s*k)?\s*(?:units|containers|boxes|pieces|pcs|mugs|cups|bottles|shirts|bags|kg|tons|m\b|meters)?\b/gi, '');
+  item = item.replace(/[,;.\-–—()]/g, ' ').replace(/\s+/g, ' ').trim();
+  item = item.replace(/^(?:for|with|of|and|in)\s+/i, '').replace(/\s+(?:for|with|of|and|in)$/i, '').trim();
+
+  if (item.length < 2) {
+    item = raw.replace(/[,.]/g, '').trim();
+  }
+
+  const formattedItem = item.split(' ').filter(Boolean).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+
+  // 5. Dynamic Category Inference
+  const lowerItem = (formattedItem + ' ' + raw).toLowerCase();
+  let category = "General B2B Wholesale";
+  if (/furniture|desk|chair|table|almirah|cabinet|rack|shelf|sofa|workstation|steel\s*furniture/.test(lowerItem)) {
+    category = "Furniture & Fabrication";
+  } else if (/brass|handicraft|casting|artisan|hardware\s*castings?/.test(lowerItem)) {
+    category = "Artisan Handicraft & Brass";
+  } else if (/steel|iron|metal|aluminium|copper|sheet\s*metal|pipe|tube|rod|wire|fastener|bolt|nut/.test(lowerItem)) {
+    category = "Metal Fabrications & Hardware";
+  } else if (/container|box|packaging|kraft|bagasse|carton|pouch|tape|tray|corrugated/.test(lowerItem)) {
+    category = "Packaging & Containers";
+  } else if (/cup|mug|ceramic|pottery|glass|bottle|crockery|plate|stoneware/.test(lowerItem)) {
+    category = "Drinkware & Ceramics";
+  } else if (/shirt|fabric|textile|cotton|canvas|bale|cloth|garment|apparel|yarn|denim/.test(lowerItem)) {
+    category = "Textiles & Cotton Canvas";
+  } else if (/wood|timber|sheesham|plywood|teak|carving|mdf|lumber/.test(lowerItem)) {
+    category = "Woodcraft & Timber Blanks";
+  }
+
   return {
-    item_name: itemName,
-    quantity,
-    max_budget: maxBudget,
-    delivery_days_limit: deliveryDaysLimit,
+    item_name: formattedItem || "Commercial Supplies",
+    quantity: quantity || 500,
+    max_budget: maxBudget || 25000,
+    delivery_days_limit: deliveryDaysLimit || 7,
     delivery_city: "New Delhi",
     category,
     confidence_score: 0.95

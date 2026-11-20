@@ -15,69 +15,7 @@ import {
   Layers
 } from 'lucide-react';
 import { parseQuery } from '../services/api';
-
-function parseInputQuery(text) {
-  let quantity = 5000;
-  let maxBudget = 20000;
-  let deliveryDaysLimit = 7;
-  let itemName = "Kraft Paper Food Containers (750ml)";
-  let category = "Packaging & Containers";
-
-  const raw = (text || "").trim();
-  const clean = raw.toLowerCase();
-  
-  const qtyMatch = clean.match(/(\d+[\d,]*)\s*(?:units|containers|boxes|pieces|pcs|mugs|cups|bottles|shirts|bags|kg|tons)?/);
-  const kMatch = clean.match(/(\d+(?:\.\d+)?)\s*k\b/);
-  if (kMatch) {
-    quantity = Math.round(parseFloat(kMatch[1]) * 1000);
-  } else if (qtyMatch && parseInt(qtyMatch[1].replace(/,/g, ''), 10) > 0) {
-    quantity = parseInt(qtyMatch[1].replace(/,/g, ''), 10);
-  }
-
-  const budgetMatch = clean.match(/(?:under|below|budget|within|max|rs\.?|₹)\s*₹?\s*(\d+[\d,]*)/);
-  if (budgetMatch) {
-    maxBudget = parseFloat(budgetMatch[1].replace(/,/g, '')) || 25000;
-  } else {
-    maxBudget = Math.max(quantity * 4, 15000);
-  }
-
-  const daysMatch = clean.match(/(\d+)\s*(?:days|day)/);
-  if (daysMatch) {
-    deliveryDaysLimit = parseInt(daysMatch[1], 10) || 7;
-  } else if (clean.includes("seven days")) {
-    deliveryDaysLimit = 7;
-  }
-
-  if (clean.includes("mug") || clean.includes("cup") || clean.includes("ceramic") || clean.includes("drinkware")) {
-    itemName = "Ceramic Wholesale Mugs (350ml)";
-    category = "Drinkware & Ceramics";
-  } else if (clean.includes("brass") || clean.includes("hardware") || clean.includes("fittings") || clean.includes("casting")) {
-    itemName = "Solid Brass Castings & Artisan Hardware";
-    category = "Artisan Handicraft & Brass";
-  } else if (clean.includes("container") || clean.includes("box") || clean.includes("packaging") || clean.includes("bagasse")) {
-    itemName = "Kraft Paper Food Containers (750ml)";
-    category = "Packaging & Containers";
-  } else if (clean.includes("shirt") || clean.includes("cotton") || clean.includes("canvas") || clean.includes("fabric") || clean.includes("textile")) {
-    itemName = "Raw Cotton Canvas Bales (Unbleached)";
-    category = "Textiles & Cotton Canvas";
-  } else if (clean.includes("wood") || clean.includes("timber") || clean.includes("sheesham")) {
-    itemName = "Seasoned Sheesham Wood Carving Blanks";
-    category = "Woodcraft & Timber Blanks";
-  } else {
-    const stripped = raw.replace(/^\d+[\d,]*\s*(?:units|containers|boxes|pieces|pcs)?\s*/i, '').trim();
-    if (stripped.length > 1) {
-      itemName = stripped.charAt(0).toUpperCase() + stripped.slice(1);
-    }
-  }
-
-  return {
-    item_name: itemName,
-    quantity,
-    max_budget: maxBudget,
-    delivery_days_limit: deliveryDaysLimit,
-    category
-  };
-}
+import { parseInputQuery } from '../utils/nlpParser';
 
 const PRESETS = [
   {
@@ -160,6 +98,18 @@ export default function RequirementForm({ onSearch, isLoading }) {
     setDeliveryDays(preset.delivery_days_limit);
     setDeliveryCity(preset.city);
     setCategory(preset.category);
+
+    if (onSearch) {
+      onSearch({
+        query_text: preset.query,
+        item_name: preset.item_name,
+        quantity: preset.quantity,
+        max_budget: preset.max_budget,
+        delivery_days_limit: preset.delivery_days_limit,
+        delivery_city: preset.city,
+        category: preset.category
+      });
+    }
   };
 
   const handleQueryChange = (e) => {
@@ -169,12 +119,20 @@ export default function RequirementForm({ onSearch, isLoading }) {
 
     // Synchronously parse typed intent
     if (val.trim().length > 1) {
-      const parsed = parseInputQuery(val);
+      const parsed = parseInputQuery(val, {
+        item_name: itemName,
+        quantity,
+        max_budget: maxBudget,
+        delivery_days_limit: deliveryDays,
+        delivery_city: deliveryCity,
+        category
+      });
       if (parsed) {
         setItemName(parsed.item_name);
         setQuantity(parsed.quantity);
         setMaxBudget(parsed.max_budget);
         setDeliveryDays(parsed.delivery_days_limit);
+        setDeliveryCity(parsed.delivery_city);
         setCategory(parsed.category);
       }
     }
@@ -237,18 +195,47 @@ export default function RequirementForm({ onSearch, isLoading }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Ensure query text is fully parsed before submission
-    const parsed = parseInputQuery(queryText);
-    const finalItem = parsed?.item_name || itemName;
-    const finalQty = parsed?.quantity || Number(quantity) || 500;
-    const finalBudget = parsed?.max_budget || Number(maxBudget) || 25000;
-    const finalDays = parsed?.delivery_days_limit || Number(deliveryDays) || 7;
-    const finalCategory = parsed?.category || category || "Drinkware & Ceramics";
+    let finalItem = itemName;
+    let finalQty = Number(quantity) || 500;
+    let finalBudget = Number(maxBudget) || 25000;
+    let finalDays = Number(deliveryDays) || 7;
+    let finalCity = deliveryCity || "New Delhi";
+    let finalCategory = category || "General B2B Wholesale";
+
+    // If active preset, use preset exact parameters
+    const matchedPreset = PRESETS.find(p => p.id === activePreset);
+    if (matchedPreset && queryText === matchedPreset.query) {
+      finalItem = matchedPreset.item_name;
+      finalQty = matchedPreset.quantity;
+      finalBudget = matchedPreset.max_budget;
+      finalDays = matchedPreset.delivery_days_limit;
+      finalCity = matchedPreset.city;
+      finalCategory = matchedPreset.category;
+    } else if (queryText.trim().length > 1) {
+      // Re-parse the prompt dynamically
+      const parsed = parseInputQuery(queryText, {
+        item_name: itemName,
+        quantity: finalQty,
+        max_budget: finalBudget,
+        delivery_days_limit: finalDays,
+        delivery_city: finalCity,
+        category: finalCategory
+      });
+      if (parsed) {
+        finalItem = parsed.item_name || finalItem;
+        finalQty = parsed.quantity || finalQty;
+        finalBudget = parsed.max_budget || finalBudget;
+        finalDays = parsed.delivery_days_limit || finalDays;
+        finalCity = parsed.delivery_city || finalCity;
+        finalCategory = parsed.category || finalCategory;
+      }
+    }
 
     setItemName(finalItem);
     setQuantity(finalQty);
     setMaxBudget(finalBudget);
     setDeliveryDays(finalDays);
+    setDeliveryCity(finalCity);
     setCategory(finalCategory);
 
     onSearch({
@@ -257,7 +244,7 @@ export default function RequirementForm({ onSearch, isLoading }) {
       quantity: finalQty,
       max_budget: finalBudget,
       delivery_days_limit: finalDays,
-      delivery_city: deliveryCity,
+      delivery_city: finalCity,
       category: finalCategory
     });
   };
@@ -310,6 +297,12 @@ export default function RequirementForm({ onSearch, isLoading }) {
             className="prompt-textarea"
             value={queryText}
             onChange={handleQueryChange}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSubmit(e);
+              }
+            }}
             placeholder="e.g. I need 5,000 food containers, under ₹20,000, delivered within seven days."
             rows={2}
           />

@@ -25,6 +25,27 @@ This document maintains an accurate, chronological record of all architectural d
 
 ## 📝 Change Log
 
+### [v1.2.0] - 2026-11-20 (Final Round Polish - Live Autonomous Intelligence & Zero-404 Catalog)
+#### Fixed & Enhanced
+- **Dynamic NLP & Manual Query Search Execution**:
+  - Replaced rigid, hardcoded substring checks in `RequirementForm.jsx` with an intelligent, order-independent entity parser (`parseInputQuery` in `utils/nlpParser.js`).
+  - Added `onKeyDown` handler to the procurement prompt `<textarea>` so pressing `Enter` directly triggers search.
+  - Added instant auto-search on preset scenario capsule clicks (`handlePresetClick`), eliminating the need for a separate manual click.
+  - Dynamically extracts product names, quantity, budget ceiling, destination city, and infers categories (`Furniture & Fabrication`, `Metal Fabrications & Hardware`, `Packaging & Containers`, etc.).
+- **Live TinyFish Autonomous Web Agent & Key Resilience**:
+  - Live TinyFish Search (`api.search.tinyfish.ai`) and Fetch (`api.fetch.tinyfish.ai`) verified returning real-time web listings (`mode: tinyfish_live`).
+  - Added automatic fallback to server environment key (`sk-tinyfish-...`) if client-provided headers or localStorage keys fail with 401/403.
+  - Cleaned supplier business name derivation from dedicated manufacturer domains (`shivamfurniture.net` -> "Shivam Furniture") and marketplace seller handles.
+  - Standardized telemetry pipeline stages (1 to 5) with distinct sequential keys, eliminating React duplicate key warnings.
+- **100% Active, Live Catalog Links (Zero 404s)**:
+  - Replaced all outdated/fake placeholder URLs across `mock_suppliers.py` and `clientSimulation.js` with active, live directory search links on IndiaMART (`dir.indiamart.com/search.mp?ss=...`), TradeIndia, and Moglix.
+  - Clicking "Source Catalog" on supplier cards now reliably opens live, active marketplace search listings.
+- **Verification & Dev Server Status**:
+  - Backend: 5/5 pytest assertions passed in `tests/test_procure.py`.
+  - Frontend: `npm run build` compiled in 968ms with 0 errors.
+  - Verified live E2E search via Vite proxy on `http://127.0.0.1:5173`.
+  - Dev servers running: FastAPI backend daemon on `127.0.0.1:8000`, Vite frontend daemon on `127.0.0.1:5173`.
+
 ### [v1.1.0] - 2026-10-20
 #### Added
 - **Monochrome Minimalist Design System**:

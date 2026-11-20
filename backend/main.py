@@ -82,15 +82,18 @@ async def search_and_evaluate(
     # If user provided natural language prompt, enhance structured params
     if request.query_text and request.query_text.strip():
         parsed = parse_procurement_query(request.query_text)
-        # Only override if user kept defaults
-        if request.quantity == 5000:
-            request.quantity = parsed.quantity
-        if request.max_budget == 20000.0:
-            request.max_budget = parsed.max_budget
-        if request.delivery_days_limit == 7:
-            request.delivery_days_limit = parsed.delivery_days_limit
-        if request.item_name == "Food Containers (750ml)":
+        # Align item name if default or extracted
+        if request.item_name in ["Food Containers (750ml)", "Commercial Supplies"] and parsed.item_name:
             request.item_name = parsed.item_name
+        # If category is default but item or parsed indicates otherwise
+        if request.category in ["Packaging & Containers", "General B2B Wholesale"] and parsed.category != "General B2B Wholesale":
+            request.category = parsed.category
+        if request.quantity == 5000 and parsed.quantity != 5000:
+            request.quantity = parsed.quantity
+        if request.max_budget == 20000.0 and parsed.max_budget != 20000.0:
+            request.max_budget = parsed.max_budget
+        if request.delivery_days_limit == 7 and parsed.delivery_days_limit != 7:
+            request.delivery_days_limit = parsed.delivery_days_limit
 
     tinyfish = TinyFishService(api_key=request.tinyfish_api_key or "")
     raw_suppliers, telemetry, mode = await tinyfish.execute_procurement_research(request)

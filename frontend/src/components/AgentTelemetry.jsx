@@ -87,10 +87,10 @@ export default function AgentTelemetry({ steps, isLive, executionMode, execution
       {/* Expanded Steps List */}
       {isExpanded && (
         <div className="telemetry-steps-list">
-          {steps.map((step) => {
+          {steps.map((step, idx) => {
             const isWarning = step.status === 'warning';
             return (
-              <div key={step.step_number} className={`telemetry-step-item ${isWarning ? 'warning' : ''}`}>
+              <div key={`${step.step_number}-${idx}`} className={`telemetry-step-item ${isWarning ? 'warning' : ''}`}>
                 <div className="step-num-badge">
                   Stage {step.step_number}
                 </div>

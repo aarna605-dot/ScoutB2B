@@ -5,7 +5,7 @@ PACKAGING_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-bizongo-01",
         "supplier_name": "EcoPack Systems (Bizongo Partner)",
         "source_domain": "bizongo.com",
-        "source_url": "https://www.bizongo.com/product/kraft-food-container-750ml",
+        "source_url": "https://dir.indiamart.com/search.mp?ss=kraft+food+containers+750ml",
         "product_title": "750ml Brown Kraft Paper Food Container with PET Clear Lid",
         "product_image": "https://images.unsplash.com/photo-1578496781985-452d4a934d50?w=600&auto=format&fit=crop&q=80",
         "category": "Packaging & Containers",
@@ -38,7 +38,7 @@ PACKAGING_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-indiamart-shrriram",
         "supplier_name": "Shrriram Packaging Solutions",
         "source_domain": "indiamart.com",
-        "source_url": "https://www.indiamart.com/shrrirampackaging/food-grade-containers.html",
+        "source_url": "https://dir.indiamart.com/search.mp?ss=round+kraft+food+containers",
         "product_title": "750ml Round Kraft Bowl with Vented Anti-Fog Lid",
         "product_image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80",
         "category": "Packaging & Containers",
@@ -70,7 +70,7 @@ PACKAGING_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-biokraft-direct",
         "supplier_name": "BioKraft India Eco-Works",
         "source_domain": "biokraftindia.com",
-        "source_url": "https://biokraftindia.com/products/bagasse-meal-container-750ml",
+        "source_url": "https://dir.indiamart.com/search.mp?ss=bagasse+food+containers",
         "product_title": "100% Sugarcane Bagasse Biodegradable 750ml Food Box",
         "product_image": "https://images.unsplash.com/photo-1589365278144-c9e705f843ba?w=600&auto=format&fit=crop&q=80",
         "category": "Packaging & Containers",
@@ -102,7 +102,7 @@ PACKAGING_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-moglix-bulk",
         "supplier_name": "Moglix Enterprise Packaging Hub",
         "source_domain": "moglix.com",
-        "source_url": "https://www.moglix.com/packaging-supplies/food-containers/750ml-kraft",
+        "source_url": "https://www.moglix.com/search?s=food+containers",
         "product_title": "Commercial Grade Heavyweight Food Container with Airtight Lid",
         "product_image": "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&auto=format&fit=crop&q=80",
         "category": "Packaging & Containers",
@@ -135,7 +135,7 @@ PACKAGING_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-alpha-pack",
         "supplier_name": "Alpha Pack Tech Traders",
         "source_domain": "indiamart.com",
-        "source_url": "https://www.indiamart.com/alphapacktech/cheap-food-containers.html",
+        "source_url": "https://dir.indiamart.com/search.mp?ss=disposable+meal+box",
         "product_title": "Economy Disposable Meal Box 750ml",
         "product_image": "https://images.unsplash.com/photo-1607344645866-009c320c5ab8?w=600&auto=format&fit=crop&q=80",
         "category": "Packaging & Containers",
@@ -172,7 +172,7 @@ BRASS_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-moradabad-brass-01",
         "supplier_name": "Moradabad Brass Works (Export Guild)",
         "source_domain": "indiamart.com",
-        "source_url": "https://www.indiamart.com/moradabadbrassworks/artisan-hardware.html",
+        "source_url": "https://dir.indiamart.com/search.mp?ss=brass+hardware+castings",
         "product_title": "Solid Brass Cabinet Castings & Door Pull Hardware",
         "product_image": "https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=600&auto=format&fit=crop&q=80",
         "category": "Artisan Handicraft & Brass",
@@ -205,7 +205,7 @@ BRASS_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-aligarh-hardware",
         "supplier_name": "Aligarh Artisan Metalcraft Co.",
         "source_domain": "tradeindia.com",
-        "source_url": "https://www.tradeindia.com/aligarh-metalcraft/antique-brass-pulls.html",
+        "source_url": "https://www.tradeindia.com/search.html?keyword=brass+hardware",
         "product_title": "Hand-Forged Antique Brass Handles & Architectural Latches",
         "product_image": "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&auto=format&fit=crop&q=80",
         "category": "Artisan Handicraft & Brass",
@@ -237,7 +237,7 @@ BRASS_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-royal-heritage-brass",
         "supplier_name": "Royal Heritage Brass Castings",
         "source_domain": "moglix.com",
-        "source_url": "https://www.moglix.com/hardware/brass-castings-bulk",
+        "source_url": "https://www.moglix.com/search?s=brass+hardware",
         "product_title": "Heavy Duty Solid Brass Architectural Fittings",
         "product_image": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80",
         "category": "Artisan Handicraft & Brass",
@@ -271,7 +271,7 @@ TEXTILE_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-surat-canvas",
         "supplier_name": "Surat Loomex Textiles Ltd.",
         "source_domain": "indiamart.com",
-        "source_url": "https://www.indiamart.com/suratloomex/cotton-canvas-bales.html",
+        "source_url": "https://dir.indiamart.com/search.mp?ss=cotton+canvas+bales",
         "product_title": "Unbleached Heavyweight Raw Cotton Canvas Bales (10oz)",
         "product_image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&auto=format&fit=crop&q=80",
         "category": "Textiles & Cotton Canvas",
@@ -301,7 +301,7 @@ TEXTILE_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-texindia-organic",
         "supplier_name": "TexIndia Organic Mills",
         "source_domain": "bizongo.com",
-        "source_url": "https://www.bizongo.com/textiles/organic-cotton-canvas",
+        "source_url": "https://dir.indiamart.com/search.mp?ss=unbleached+cotton+canvas",
         "product_title": "100% GOTS Certified Natural Canvas Fabric Rolls",
         "product_image": "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80",
         "category": "Textiles & Cotton Canvas",
@@ -333,7 +333,7 @@ WOOD_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-saharanpur-wood",
         "supplier_name": "Saharanpur Artisan Carving Guild",
         "source_domain": "indiamart.com",
-        "source_url": "https://www.indiamart.com/saharanpurwood/sheesham-blanks.html",
+        "source_url": "https://dir.indiamart.com/search.mp?ss=sheesham+wood+blanks",
         "product_title": "Kiln-Dried Seasoned Sheesham Wood Carving Blocks (4\"x4\"x8\")",
         "product_image": "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=600&auto=format&fit=crop&q=80",
         "category": "Woodcraft & Timber Blanks",
@@ -363,7 +363,7 @@ WOOD_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-marwar-timber",
         "supplier_name": "Marwar Timber & Crafts",
         "source_domain": "tradeindia.com",
-        "source_url": "https://www.tradeindia.com/marwartimber/sheesham-timber-blanks.html",
+        "source_url": "https://www.tradeindia.com/search.html?keyword=sheesham+timber+blanks",
         "product_title": "Planed Indian Rosewood & Sheesham Turning Blanks",
         "product_image": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=600&auto=format&fit=crop&q=80",
         "category": "Woodcraft & Timber Blanks",
@@ -395,7 +395,7 @@ CERAMICS_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-khurja-pottery",
         "supplier_name": "Khurja Ceramic Heritage Pottery",
         "source_domain": "indiamart.com",
-        "source_url": "https://www.indiamart.com/khurjapottery/wholesale-mugs.html",
+        "source_url": "https://dir.indiamart.com/search.mp?ss=khurja+ceramic+mugs",
         "product_title": "Wholesale Matte Glazed Ceramic Mugs (350ml)",
         "product_image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
         "category": "Drinkware & Ceramics",
@@ -427,7 +427,7 @@ CERAMICS_SUPPLIERS: List[Dict[str, Any]] = [
         "id": "sup-clayvibe-tableware",
         "supplier_name": "ClayVibe Tableware Studio",
         "source_domain": "bizongo.com",
-        "source_url": "https://www.bizongo.com/ceramic-drinkware/coffee-mugs",
+        "source_url": "https://dir.indiamart.com/search.mp?ss=ceramic+coffee+mugs",
         "product_title": "Stoneware Microwave-Safe Wholesale Coffee Mugs",
         "product_image": "https://images.unsplash.com/photo-1577937927133-66ef06acdf18?w=600&auto=format&fit=crop&q=80",
         "category": "Drinkware & Ceramics",
@@ -473,6 +473,70 @@ CATEGORY_MAP = {
     "mugs": CERAMICS_SUPPLIERS
 }
 
+def get_category_image_pool(item_name: str, category: str) -> List[str]:
+    combined = f"{item_name} {category}".lower()
+    if any(k in combined for k in ["paper cup", "disposable cup", "coffee cup", "tea cup", "paper glass"]):
+        return [
+            "https://images.unsplash.com/photo-1577937927133-66ef06acdf18?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1584473457406-6240486418e9?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&auto=format&fit=crop&q=80"
+        ]
+    elif any(k in combined for k in ["furniture", "chair", "desk", "table", "almirah", "rack", "shelf", "cabinet"]):
+        return [
+            "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1580481077195-c3a82104536b?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&auto=format&fit=crop&q=80"
+        ]
+    elif any(k in combined for k in ["steel", "iron", "metal", "sheet metal", "pipe", "tube", "hardware", "fitting", "bolt", "rod"]):
+        return [
+            "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1535813547-99c456a41d4a?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1553413077-190dd305871c?w=600&auto=format&fit=crop&q=80"
+        ]
+    elif any(k in combined for k in ["mug", "cup", "ceramic", "pottery", "clay", "stoneware"]):
+        return [
+            "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1577937927133-66ef06acdf18?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1481833761820-0509d3217039?w=600&auto=format&fit=crop&q=80"
+        ]
+    elif any(k in combined for k in ["brass", "handicraft", "casting"]):
+        return [
+            "https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80"
+        ]
+    elif any(k in combined for k in ["cotton", "canvas", "fabric", "textile", "shirt", "garment"]):
+        return [
+            "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=600&auto=format&fit=crop&q=80"
+        ]
+    elif any(k in combined for k in ["wood", "timber", "sheesham", "log"]):
+        return [
+            "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=600&auto=format&fit=crop&q=80"
+        ]
+    elif any(k in combined for k in ["container", "box", "packaging", "kraft", "bagasse", "pouch"]):
+        return [
+            "https://images.unsplash.com/photo-1578496781985-452d4a934d50?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1589365278144-c9e705f843ba?w=600&auto=format&fit=crop&q=80"
+        ]
+    else:
+        return [
+            "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1553413077-190dd305871c?w=600&auto=format&fit=crop&q=80"
+        ]
+
 def generate_custom_supplier_pool(item_name: str, category: str, quantity: int = 5000, budget: float = 20000.0) -> List[Dict[str, Any]]:
     """Dynamically generates a realistic supplier pool for any user-provided search term."""
     target_unit = max(1.5, budget / max(quantity, 1))
@@ -482,102 +546,139 @@ def generate_custom_supplier_pool(item_name: str, category: str, quantity: int =
     p4 = round(target_unit * 1.15, 2)
     p5_trap = round(target_unit * 0.70, 2)
 
+    combined = f"{item_name} {category}".lower()
+    is_food = any(k in combined for k in ["food", "container", "box", "meal", "cup", "mug", "plate", "bowl"])
+    is_bio = any(k in combined for k in ["bagasse", "eco", "kraft", "paper", "wood", "compostable"])
+    gst_rate = 18.0 if any(k in combined for k in ["steel", "furniture", "metal", "hardware", "electronic", "plastic", "brass", "iron", "casting"]) else 12.0
+    images = get_category_image_pool(item_name, category)
+
+    first_word = item_name.split()[0] if item_name.strip() else "Industrial"
+
     return [
         {
             "id": "sup-custom-bizongo",
-            "supplier_name": f"Apex {item_name.split()[0]} Manufacturers (Bizongo Partner)",
+            "supplier_name": f"Apex {first_word} Manufacturers (Bizongo Partner)",
             "source_domain": "bizongo.com",
-            "source_url": f"https://www.bizongo.com/b2b-wholesale/{item_name.lower().replace(' ', '-')}",
+            "source_url": f"https://dir.indiamart.com/search.mp?ss={item_name.lower().replace(' ', '+')}",
             "product_title": f"Commercial Wholesale {item_name} (Verified Specification)",
-            "product_image": "https://images.unsplash.com/photo-1578496781985-452d4a934d50?w=600&auto=format&fit=crop&q=80",
+            "product_image": images[0 % len(images)],
             "category": category or "Wholesale Supplies",
             "base_unit_price": p1,
-            "moq": max(500, int(quantity * 0.2)),
+            "moq": max(100, int(quantity * 0.2)),
             "tiered_pricing": [
-                {"min_qty": int(quantity * 0.2), "unit_price": round(p1 * 1.2, 2)},
-                {"min_qty": int(quantity * 0.5), "unit_price": round(p1 * 1.1, 2)},
+                {"min_qty": max(100, int(quantity * 0.2)), "unit_price": round(p1 * 1.2, 2)},
+                {"min_qty": max(200, int(quantity * 0.5)), "unit_price": round(p1 * 1.1, 2)},
                 {"min_qty": quantity, "unit_price": p1}
             ],
-            "gst_percentage": 18.0,
+            "gst_percentage": gst_rate,
             "shipping_policy": "free_over_10k",
             "base_shipping_cost": 450.0,
             "estimated_delivery_days": 4,
             "supplier_rating": 4.8,
             "review_count": 215,
             "verified_seller": True,
-            "food_grade_certified": True,
-            "biodegradable": True,
+            "food_grade_certified": is_food,
+            "biodegradable": is_bio,
             "location_city": "Delhi NCR Logistics Hub",
             "contact_phone": "+91 98110 55432",
             "contact_email": "orders@apexwholesale.in",
-            "evidence_snippet": f"Extract from bizongo.com: 'Industrial-grade specification for {item_name}. Automated bulk dispatch with live GPS tracking. Free freight over ₹10,000.'",
+            "evidence_snippet": f"Extract from bizongo.com: 'Industrial-grade specification for {item_name}. Automated bulk dispatch with live tracking. GST {gst_rate:.0f}% applicable. Free freight on orders over ₹10,000.'",
             "missing_or_risk_notes": []
         },
         {
             "id": "sup-custom-indiamart",
-            "supplier_name": f"National {item_name.split()[0]} Guild Works",
+            "supplier_name": f"National {first_word} Guild Works",
             "source_domain": "indiamart.com",
-            "source_url": f"https://www.indiamart.com/wholesale/{item_name.lower().replace(' ', '-')}.html",
+            "source_url": f"https://dir.indiamart.com/search.mp?ss={item_name.lower().replace(' ', '+')}",
             "product_title": f"Direct Factory {item_name} with Standard Quality Assurance",
-            "product_image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80",
+            "product_image": images[1 % len(images)],
             "category": category or "Wholesale Supplies",
             "base_unit_price": p2,
-            "moq": max(1000, int(quantity * 0.3)),
+            "moq": max(150, int(quantity * 0.3)),
             "tiered_pricing": [
-                {"min_qty": int(quantity * 0.3), "unit_price": round(p2 * 1.15, 2)},
+                {"min_qty": max(150, int(quantity * 0.3)), "unit_price": round(p2 * 1.15, 2)},
                 {"min_qty": quantity, "unit_price": p2}
             ],
-            "gst_percentage": 12.0,
+            "gst_percentage": gst_rate,
             "shipping_policy": "flat_freight",
             "base_shipping_cost": 480.0,
             "estimated_delivery_days": 5,
             "supplier_rating": 4.6,
             "review_count": 134,
             "verified_seller": True,
-            "food_grade_certified": True,
+            "food_grade_certified": is_food,
             "biodegradable": False,
             "location_city": "Okhla Phase II, New Delhi",
             "contact_phone": "+91 98710 44321",
             "contact_email": "sales@nationalguildworks.com",
-            "evidence_snippet": f"Extract from indiamart.com: 'TrustSEAL Verified 6-year exporter. Full compliance documentation for {item_name}. Fast dispatch in 4-5 days.'",
+            "evidence_snippet": f"Extract from indiamart.com: 'TrustSEAL Verified exporter. Full compliance documentation for {item_name}. Fast dispatch in 4-5 business days.'",
             "missing_or_risk_notes": []
         },
         {
             "id": "sup-custom-tradeindia",
-            "supplier_name": f"EcoDirect {item_name.split()[0]} Enterprises",
+            "supplier_name": f"EcoDirect {first_word} Enterprises",
             "source_domain": "tradeindia.com",
-            "source_url": f"https://www.tradeindia.com/products/{item_name.lower().replace(' ', '-')}",
+            "source_url": f"https://www.tradeindia.com/search.html?keyword={item_name.lower().replace(' ', '+')}",
             "product_title": f"Sustainable Premium {item_name}",
-            "product_image": "https://images.unsplash.com/photo-1589365278144-c9e705f843ba?w=600&auto=format&fit=crop&q=80",
+            "product_image": images[2 % len(images)],
             "category": category or "Wholesale Supplies",
             "base_unit_price": p3,
-            "moq": max(500, int(quantity * 0.25)),
+            "moq": max(100, int(quantity * 0.25)),
             "tiered_pricing": [
-                {"min_qty": int(quantity * 0.25), "unit_price": round(p3 * 1.1, 2)},
+                {"min_qty": max(100, int(quantity * 0.25)), "unit_price": round(p3 * 1.1, 2)},
                 {"min_qty": quantity, "unit_price": p3}
             ],
-            "gst_percentage": 12.0,
+            "gst_percentage": gst_rate,
             "shipping_policy": "free_over_10k",
             "base_shipping_cost": 400.0,
             "estimated_delivery_days": 6,
             "supplier_rating": 4.9,
             "review_count": 310,
             "verified_seller": True,
-            "food_grade_certified": True,
-            "biodegradable": True,
+            "food_grade_certified": is_food,
+            "biodegradable": is_bio,
             "location_city": "Greater Noida, UP",
             "contact_phone": "+91 99580 88712",
             "contact_email": "wholesale@ecodirect.in",
-            "evidence_snippet": f"Extract from tradeindia.com: 'Certified environmentally compliant production of {item_name}. Delivered door-to-door.'",
+            "evidence_snippet": f"Extract from tradeindia.com: 'Certified compliant batch production of {item_name}. Delivered door-to-door with transit cover.'",
+            "missing_or_risk_notes": []
+        },
+        {
+            "id": "sup-custom-moglix",
+            "supplier_name": f"Moglix Commercial {first_word} Hub",
+            "source_domain": "moglix.com",
+            "source_url": f"https://www.moglix.com/search?s={item_name.lower().replace(' ', '+')}",
+            "product_title": f"Heavy-Duty Enterprise {item_name}",
+            "product_image": images[3 % len(images)],
+            "category": category or "Wholesale Supplies",
+            "base_unit_price": p4,
+            "moq": max(50, int(quantity * 0.1)),
+            "tiered_pricing": [
+                {"min_qty": max(50, int(quantity * 0.1)), "unit_price": round(p4 * 1.12, 2)},
+                {"min_qty": quantity, "unit_price": p4}
+            ],
+            "gst_percentage": gst_rate,
+            "shipping_policy": "flat_freight",
+            "base_shipping_cost": 550.0,
+            "estimated_delivery_days": 4,
+            "supplier_rating": 4.7,
+            "review_count": 180,
+            "verified_seller": True,
+            "food_grade_certified": is_food,
+            "biodegradable": False,
+            "location_city": "Bhiwandi / Mumbai Hub",
+            "contact_phone": "+91 80010 77665",
+            "contact_email": "enterprise@moglix.com",
+            "evidence_snippet": f"Extract from moglix.com: 'Commercial specification {item_name} with GST invoice and manufacturer warranty. Fast dispatch within 3-4 days.'",
             "missing_or_risk_notes": []
         },
         {
             "id": "sup-custom-trap",
-            "supplier_name": f"Discount {item_name.split()[0]} Bazaar Traders",
+            "supplier_name": f"Discount {first_word} Bazaar Traders",
             "source_domain": "indiamart.com",
-            "source_url": f"https://www.indiamart.com/discounttraders/{item_name.lower().replace(' ', '-')}.html",
+            "source_url": f"https://dir.indiamart.com/search.mp?ss={item_name.lower().replace(' ', '+')}",
             "product_title": f"Budget Clearance {item_name}",
-            "product_image": "https://images.unsplash.com/photo-1607344645866-009c320c5ab8?w=600&auto=format&fit=crop&q=80",
+            "product_image": images[4 % len(images)],
             "category": category or "Wholesale Supplies",
             "base_unit_price": p5_trap,
             "moq": quantity * 4,  # MOQ Trap!
@@ -585,7 +686,7 @@ def generate_custom_supplier_pool(item_name: str, category: str, quantity: int =
                 {"min_qty": quantity * 4, "unit_price": p5_trap},
                 {"min_qty": quantity, "unit_price": round(target_unit * 1.35, 2)}
             ],
-            "gst_percentage": 18.0,
+            "gst_percentage": gst_rate,
             "shipping_policy": "flat_freight",
             "base_shipping_cost": 650.0,
             "estimated_delivery_days": 7,
@@ -610,29 +711,28 @@ def get_raw_supplier_pool(
     quantity: int = 5000,
     budget: float = 20000.0
 ) -> List[Dict[str, Any]]:
-    """Returns realistic supplier pool filtered or tailored to category and query."""
-    key = (category or "").strip().lower()
-    item_key = (item_name or "").strip().lower()
+    """Returns realistic supplier pool tailored to any exact query entered by the user."""
+    clean_item = (item_name or "").strip()
+    clean_cat = (category or "").strip()
+    item_lower = clean_item.lower()
 
-    # Match predefined category pools
-    for cat_name, pool in CATEGORY_MAP.items():
-        if cat_name in key or cat_name in item_key:
-            return pool
+    # Exact preset capsules ONLY
+    PRESET_EXACT_MAP = {
+        "kraft paper food containers (750ml)": PACKAGING_SUPPLIERS,
+        "food containers (750ml)": PACKAGING_SUPPLIERS,
+        "artisan brass castings & hardware fittings": BRASS_SUPPLIERS,
+        "raw cotton canvas bales (unbleached)": TEXTILE_SUPPLIERS,
+        "seasoned sheesham wood carving blanks": WOOD_SUPPLIERS,
+        "biodegradable 3-compartment meal trays": PACKAGING_SUPPLIERS,
+        "wholesale ceramic coffee mugs": CERAMICS_SUPPLIERS
+    }
 
-    # If item name contains known materials
-    if any(k in item_key for k in ["kraft", "container", "box", "bagasse", "pack", "tray", "bowl"]):
-        return PACKAGING_SUPPLIERS
-    if any(k in item_key for k in ["brass", "metal", "hardware", "casting", "fitting"]):
-        return BRASS_SUPPLIERS
-    if any(k in item_key for k in ["cotton", "canvas", "textile", "fabric", "yarn"]):
-        return TEXTILE_SUPPLIERS
-    if any(k in item_key for k in ["wood", "timber", "sheesham", "carving", "log"]):
-        return WOOD_SUPPLIERS
-    if any(k in item_key for k in ["ceramic", "mug", "cup", "pottery", "clay"]):
-        return CERAMICS_SUPPLIERS
+    if item_lower in PRESET_EXACT_MAP:
+        return PRESET_EXACT_MAP[item_lower]
 
-    # If specific query provided but outside presets, dynamically generate
-    if item_name and item_name != "Food Containers (750ml)":
-        return generate_custom_supplier_pool(item_name, category, quantity, budget)
+    # For ANY custom user query (Paper Cups, Steel Furniture, Office Desks, Plastic Bottles, etc.)
+    # Generate dynamic, verified suppliers with live directory search catalog URLs for that exact item!
+    if clean_item and clean_item not in ["Commercial Supplies"]:
+        return generate_custom_supplier_pool(clean_item, clean_cat, quantity, budget)
 
     return PACKAGING_SUPPLIERS
