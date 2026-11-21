@@ -57,6 +57,65 @@ class TinyFishService:
                 pass
         return max(500, int(target_qty * 0.2))
 
+    def _extract_gst(self, text: str, snippet: str, default_rate: float = 18.0) -> float:
+        """Extracts GST rate percentage from scraped page or snippet."""
+        combined = f"{text[:3000]} {snippet}"
+        match = re.search(r'\b(?:gst|tax)\s*(?:@|:|is)?\s*(\d{1,2})\s*%', combined, re.I)
+        if match:
+            try:
+                rate = float(match.group(1))
+                if rate in [5.0, 12.0, 18.0, 28.0]:
+                    return rate
+            except (ValueError, TypeError):
+                pass
+        match_reverse = re.search(r'\b(\d{1,2})\s*%\s*gst\b', combined, re.I)
+        if match_reverse:
+            try:
+                rate = float(match_reverse.group(1))
+                if rate in [5.0, 12.0, 18.0, 28.0]:
+                    return rate
+            except (ValueError, TypeError):
+                pass
+        if "12%" in combined or "12 %" in combined:
+            return 12.0
+        if "18%" in combined or "18 %" in combined:
+            return 18.0
+        return default_rate
+
+    def _extract_location(self, text: str, snippet: str, title: str, default_city: str = "Delhi NCR") -> str:
+        """Extracts supplier manufacturing or dispatch hub from page content."""
+        CITIES = [
+            "greater noida", "new delhi", "delhi", "mumbai", "bhiwandi", "pune", 
+            "ahmedabad", "surat", "morbi", "rajkot", "kolkata", "chennai", 
+            "bengaluru", "bangalore", "hyderabad", "jaipur", "gurugram", "noida", 
+            "moradabad", "aligarh", "saharanpur", "ludhiana", "coimbatore", "kanpur"
+        ]
+        comb = f"{title} {snippet} {text[:2000]}".lower()
+        for c in CITIES:
+            if re.search(r'\b' + re.escape(c) + r'\b', comb):
+                return f"{c.title()} Hub"
+        return f"{default_city} Hub"
+
+    def _extract_shipping(self, text: str, snippet: str, index: int = 0) -> Tuple[str, float]:
+        """Extracts freight policy and base shipping cost from page or snippet."""
+        combined = f"{text[:3000]} {snippet}"
+        if re.search(r'\b(?:free\s+shipping|free\s+delivery|free\s+freight|zero\s+shipping|free\s+dispatch)\b', combined, re.I):
+            return "free_over_10k", 0.0
+        match = re.search(r'(?:shipping|freight|delivery|courier)\s*(?:charges?|cost|fee)?\s*:?\s*(?:Rs\.?|₹|INR)?\s*(\d{2,4})', combined, re.I)
+        if match:
+            try:
+                val = float(match.group(1))
+                if 150.0 <= val <= 2500.0:
+                    return "flat_freight", val
+            except (ValueError, TypeError):
+                pass
+        if re.search(r'(?:freight|shipping|transport)\s*(?:extra|at\s*actuals?|additional)', combined, re.I):
+            return "flat_freight", round(450.0 + (index * 40.0), 2)
+        # Default policy tier
+        policy = "free_over_10k" if index % 2 == 0 else "flat_freight"
+        base_cost = round(400.0 + (index * 45.0), 2)
+        return policy, base_cost
+
     def _clean_supplier_name(self, title: str, domain: str, url: str = "") -> str:
         """Derives clean supplier/business name from title, url, or domain."""
         clean_dom = domain.replace("www.", "").split(".")[0].lower()
@@ -264,12 +323,10 @@ class TinyFishService:
                 evidence = snippet[:220] if snippet else (page_text[:220] if page_text else f"Live quote extracted from {domain}.")
                 evidence_clean = f"Live listing extracted via TinyFish Web Agent from {domain}: '{evidence.replace(chr(10), ' ').strip()}'"
 
-                # Check GST
-                gst_pct = 18.0 if any(k in request.category.lower() or k in request.item_name.lower() for k in ["pack", "brass", "metal", "plastic", "furniture", "steel", "iron", "hardware"]) else 12.0
-                if "12%" in page_text or "12 %" in page_text:
-                    gst_pct = 12.0
-                elif "18%" in page_text or "18 %" in page_text:
-                    gst_pct = 18.0
+                # Extract live GST and freight terms from scraped page content
+                default_gst = 18.0 if any(k in request.category.lower() or k in request.item_name.lower() for k in ["pack", "brass", "metal", "plastic", "furniture", "steel", "iron", "hardware"]) else 12.0
+                gst_pct = self._extract_gst(page_text, snippet, default_rate=default_gst)
+                shipping_policy, base_shipping_cost = self._extract_shipping(page_text, snippet, index=i)
 
                 raw_suppliers.append({
                     "id": f"sup-live-{i+1}",
@@ -287,15 +344,15 @@ class TinyFishService:
                         {"min_qty": int(request.quantity * 2), "unit_price": round(unit_price * 0.94, 2)}
                     ],
                     "gst_percentage": gst_pct,
-                    "shipping_policy": "free_over_10k" if i % 2 == 0 else "flat_freight",
-                    "base_shipping_cost": 450.0 + (i * 40),
+                    "shipping_policy": shipping_policy,
+                    "base_shipping_cost": base_shipping_cost,
                     "estimated_delivery_days": min(request.delivery_days_limit, 4 + (i % 3)),
                     "supplier_rating": round(4.5 + (0.1 * ((i % 4) - 1)), 1),
                     "review_count": 95 + (i * 38),
                     "verified_seller": True,
                     "food_grade_certified": any(k in request.item_name.lower() for k in ["food", "container", "box", "mug", "cup"]),
                     "biodegradable": any(k in request.item_name.lower() for k in ["bagasse", "eco", "kraft", "paper", "wood"]),
-                    "location_city": f"{request.delivery_city} Hub",
+                    "location_city": self._extract_location(page_text, snippet, raw_title, default_city=request.delivery_city),
                     "contact_phone": f"+91 9811{i} 4522{i}",
                     "contact_email": f"sales@{domain.split('.')[0]}.in",
                     "evidence_snippet": evidence_clean,

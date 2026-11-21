@@ -24,26 +24,61 @@ def calculate_applicable_unit_price(quantity: int, raw_supplier: Dict[str, Any])
     smallest_tier = min(tiered_pricing, key=lambda x: x["min_qty"])
     return float(smallest_tier["unit_price"])
 
+def compute_zone_freight(origin_city: str, destination_city: str) -> Tuple[float, str]:
+    """
+    Computes freight tariff based on Indian B2B logistics zones:
+    Zone 1 (Intra-Cluster Metro, e.g. Delhi NCR <-> Delhi): ₹350 flat
+    Zone 2 (Regional Inter-State, e.g. Jaipur/UP <-> Delhi): ₹500 flat
+    Zone 3 (National Long-Haul, e.g. Mumbai/Gujarat/Bengaluru <-> North): ₹750 flat
+    """
+    CLUSTERS = {
+        "ncr": {"delhi", "new delhi", "noida", "greater noida", "gurugram", "gurgaon", "okhla", "faridabad", "ghaziabad"},
+        "west": {"mumbai", "bhiwandi", "pune", "ahmedabad", "surat", "gujarat", "morbi", "rajkot", "thane"},
+        "north": {"jaipur", "rajasthan", "moradabad", "aligarh", "saharanpur", "ludhiana", "kanpur", "agra"},
+        "south": {"bangalore", "bengaluru", "chennai", "hyderabad", "peenya", "coimbatore"},
+        "east": {"kolkata", "bengal", "patna", "odisha"}
+    }
+
+    def get_cluster(city: str) -> str:
+        c_low = (city or "").lower()
+        for name, members in CLUSTERS.items():
+            if any(m in c_low for m in members):
+                return name
+        return "other"
+
+    c_orig = get_cluster(origin_city)
+    c_dest = get_cluster(destination_city)
+
+    if c_orig == c_dest and c_orig != "other":
+        return 350.0, "Zone 1 (Intra-Cluster Metro)"
+    elif (c_orig in ["ncr", "north"] and c_dest in ["ncr", "north"]) or (c_orig in ["west", "south"] and c_dest in ["west", "south"]):
+        return 500.0, "Zone 2 (Regional Inter-State)"
+    else:
+        return 750.0, "Zone 3 (National Long-Haul)"
+
 def compute_landed_cost(
     quantity: int,
     unit_price: float,
-    raw_supplier: Dict[str, Any]
+    raw_supplier: Dict[str, Any],
+    destination_city: str = "New Delhi"
 ) -> CostBreakdown:
     """
-    Computes true total landed cost factoring GST, freight policies, and handling.
+    Computes true total landed cost factoring GST, logistics zone tariffs, and handling.
     """
     base_subtotal = round(unit_price * quantity, 2)
     gst_pct = float(raw_supplier.get("gst_percentage", 18.0))
     gst_amount = round(base_subtotal * (gst_pct / 100.0), 2)
     
-    # Freight calculation
+    # Location-based logistics zone freight calculation
+    origin_city = str(raw_supplier.get("location_city", "India"))
+    zone_tariff, zone_label = compute_zone_freight(origin_city, destination_city)
     shipping_policy = raw_supplier.get("shipping_policy", "flat_freight")
-    base_shipping = float(raw_supplier.get("base_shipping_cost", 450.0))
     
+    # Bulk order freight waiver threshold (orders over ₹10,000)
     if shipping_policy == "free_over_10k" and base_subtotal >= 10000.0:
         shipping_cost = 0.0
     else:
-        shipping_cost = base_shipping
+        shipping_cost = float(raw_supplier.get("base_shipping_cost", zone_tariff))
 
     # Nominal transit handling & insurance (1% capped at ₹250)
     handling_fee = round(min(base_subtotal * 0.01, 250.0), 2)
@@ -74,7 +109,7 @@ def evaluate_and_rank_offers(
     temp_list = []
     for raw in raw_suppliers:
         unit_price = calculate_applicable_unit_price(request.quantity, raw)
-        breakdown = compute_landed_cost(request.quantity, unit_price, raw)
+        breakdown = compute_landed_cost(request.quantity, unit_price, raw, destination_city=request.delivery_city)
         temp_list.append((raw, unit_price, breakdown))
         
     if not temp_list:
